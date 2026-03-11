@@ -1,7 +1,14 @@
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 
-export async function createPost(text, mediaUrl, mediaType, lat, lon, userId) {
+export async function createPost(text, mediaUrl, mediaType, lat, lon) {
+
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
 
   await addDoc(collection(db, "Posts"), {
     text: text,
@@ -12,7 +19,7 @@ export async function createPost(text, mediaUrl, mediaType, lat, lon, userId) {
     timestamp: Date.now(),
     likesCount: 0,
     commentsCount: 0,
-    userId: userId
+    userId: user.uid
   });
 
 }
