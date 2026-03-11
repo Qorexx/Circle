@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="styles.css">
   <title>Circle Test</title>
 
   <style>
+    .creator{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom:20px;
+}
+
+.creator input{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+.creator button{
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.creator button:hover{
+  background:#1d4ed8;
+}
+
 body{
   font-family: Arial, Helvetica, sans-serif;
   background:#f3f4f6;
   margin:0;
-  padding:20px;
+  padding:20px 0;
+  display:flex;
+  justify-content:center;
 }
 
 h1{
@@ -56,8 +89,8 @@ h1{
 }
 
 #app{
+  width:100%;
   max-width:600px;
-  margin:auto;
 }
 
 .like-btn{
@@ -82,16 +115,20 @@ h1{
 
 <body>
     <div id="app">
-        <h1>Test Post Creator</h1>
-        <button id="loginBtn">Login with Google</button>
+        <div class="creator">
+<h1>Create Post</h1>
+
+<button id="loginBtn">Login with Google</button>
 
 <input id="caption" placeholder="Write a caption">
 
-<input type="file" id="photo">
+<input type="file" id="photo" hidden>
+<button id="choosePhoto">Choose Photo</button>
 
-<br><br>
+<span id="fileName">No file selected</span>
 
-<button id="createPost">Create Test Post</button>
+<button id="createPost">Create Post</button>
+</div>
 
 <h2>Nearby Posts</h2>
 
@@ -107,6 +144,19 @@ import { likePost } from "./likePost.js";
 const createBtn = document.getElementById("createPost");
 const feed = document.getElementById("feed");
 const captionInput = document.getElementById("caption");
+const photoInput = document.getElementById("photo");
+const chooseBtn = document.getElementById("choosePhoto");
+const fileName = document.getElementById("fileName");
+
+chooseBtn.onclick = () => {
+  photoInput.click();
+};
+
+photoInput.onchange = () => {
+  if (photoInput.files.length > 0) {
+    fileName.innerText = photoInput.files[0].name;
+  }
+};
 // const loginBtn = document.getElementById("loginBtn");
 
 // let currentUser = null;

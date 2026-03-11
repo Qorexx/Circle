@@ -126,4 +126,124 @@ git clone https://github.com/Qorexx/Circle.git
 
 Open the project folder.
 
-Run a local server (for example VSCode Live Server) and open index.html.
+Run a local server (for example VSCode Live Server) and open index.html.# Circle Social App – Frontend Development Log (Today)
+
+## Overview
+
+Today we worked on improving the **frontend of the Circle social media application**. The focus was on building the post creation interface, improving the user interface design, and fixing several usability bugs encountered during development. The work primarily involved modifications to the main HTML layout and the CSS styling to make the application cleaner and easier to interact with.
+
+---
+
+# 1. Post Creation Interface
+
+A dedicated **post creation section** was designed at the top of the application. This section allows users to:
+
+* Write a caption for their post
+* Upload an image
+* Create a new post
+
+The inputs and buttons were grouped into a structured container to make the interface more organized and visually clear. This helps users easily understand where to create posts and improves the overall layout of the page.
+
+---
+
+# 2. Custom Image Upload Button
+
+One of the improvements made today was replacing the default browser file input with a **custom upload button**.
+
+### Problem
+
+The default file input provided by browsers looks different across devices and does not match the design of the rest of the interface.
+
+### Solution
+
+The file input element was hidden and replaced with a styled button that triggers the file selection process. This allows the upload control to match the rest of the application's design and improves visual consistency.
+
+### Result
+
+Users now interact with a clean, styled upload button instead of the browser's default file input.
+
+---
+
+# 3. Displaying the Selected File Name
+
+Another usability improvement involved showing the **name of the selected file**.
+
+### Problem
+
+After selecting an image, the interface did not indicate whether a file had been successfully chosen.
+
+### Solution
+
+A small text element was added next to the upload button to display the selected file name.
+
+### Result
+
+Users now receive confirmation that their image has been selected before creating a post.
+
+---
+
+# 4. Page Alignment Issue
+
+During testing, the entire application appeared **aligned to the left side of the page instead of being centered**.
+
+### Problem
+
+The layout configuration in the CSS restricted the width of the page in a way that prevented proper centering of the application interface.
+
+### Solution
+
+The layout styling was adjusted so that the main application container controls the width of the content, while the page itself centers this container horizontally.
+
+### Result
+
+The interface is now properly centered on the page, providing a cleaner and more balanced layout.
+
+---
+
+# 5. Feed Layout Improvements
+
+The feed that displays nearby posts was refined so that posts appear as **card-style elements** stacked vertically. Each post card contains:
+
+* The username of the person who posted
+* The time since the post was created
+* The approximate distance from the user
+* The post caption
+* The uploaded image (if present)
+* A like button and like counter
+
+This layout makes posts easier to read and visually separates them from each other.
+
+---
+
+# 6. Like Button Interaction
+
+The like button functionality was tested and improved to provide immediate visual feedback.
+
+### Behavior
+
+When a user clicks the like button:
+
+* The like count increases instantly on the interface.
+* The change is then sent to the backend to update the stored data.
+
+### Result
+
+This approach makes the application feel more responsive and interactive for the user.
+
+---
+
+# Summary of Today's Progress
+
+During this development session we successfully:
+
+* Built a structured **post creation interface**
+* Implemented a **custom image upload button**
+* Added **file name display after image selection**
+* Fixed **page alignment and layout issues**
+* Improved the **visual layout of the post feed**
+* Verified and refined the **like button interaction**
+
+These improvements significantly enhanced the usability and visual structure of the Circle social media application's frontend.
+
+
+

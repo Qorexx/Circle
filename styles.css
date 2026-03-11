@@ -1,0 +1,138 @@
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* PAGE */
+
+body{
+background:#f3f4f6;
+display:flex;
+justify-content:center;
+padding:40px 20px;
+}
+
+
+/* TOP CONTROLS */
+
+button,
+input[type="text"],
+input[type="file"]{
+margin-right:10px;
+margin-bottom:15px;
+}
+
+
+/* GOOGLE LOGIN BUTTON */
+
+#googleLogin{
+background:white;
+border:1px solid #dadce0;
+padding:10px 16px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+}
+
+#googleLogin:hover{
+background:#f8f9fa;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+/* CAPTION INPUT */
+
+#caption{
+padding:10px 12px;
+border-radius:8px;
+border:1px solid #ccc;
+width:220px;
+font-size:14px;
+transition:0.2s;
+}
+
+#caption:focus{
+outline:none;
+border-color:#2563eb;
+box-shadow:0 0 0 2px rgba(37,99,235,0.2);
+}
+
+
+/* FILE INPUT */
+
+#mediaInput{
+font-size:14px;
+}
+
+
+/* CREATE POST BUTTON */
+
+#createPost{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+}
+
+#createPost:hover{
+background:#1d4ed8;
+box-shadow:0 3px 8px rgba(0,0,0,0.15);
+}
+
+
+/* HEADINGS */
+
+h2{
+margin-top:25px;
+margin-bottom:15px;
+}
+
+
+/* FEED */
+
+#feed{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+
+/* POST CARDS */
+
+.post{
+background:white;
+padding:18px;
+border-radius:14px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+
+/* POST IMAGE */
+
+.post img{
+width:100%;
+border-radius:12px;
+margin-top:10px;
+}
+
+
+/* LIKE */
+
+.post span{
+font-weight:500;
+}
+
+#app{
+width:100%;
+max-width:600px;
+}
