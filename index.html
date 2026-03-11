@@ -140,6 +140,9 @@ import { createPost } from "./createPost.js";
 import { getNearbyPosts } from "./getNearbyPosts.js";
 import { likePost } from "./likePost.js";
 import { getUser } from "./getUser.js";
+import { createComment } from "./createComment.js";
+import { auth } from "./firebase.js";
+import { getComments } from "./getComments.js";
 // import { loginWithGoogle } from "./login.js";
 
 const createBtn = document.getElementById("createPost");
@@ -283,7 +286,7 @@ async function loadPosts() {
 
 div.innerHTML = `
 <div class="post-header">
-<span class="username">${username}</span>
+<span class="username" data-uid="${post.userId}">${username}</span>
 • ${timeAgo(post.timestamp)}
 • ${dist.toFixed(2)} km away
 </div>
@@ -298,11 +301,55 @@ ${post.text}
 <span class="heart like-btn" data-id="${post.id}">❤️</span>
 <span class="likes">${post.likesCount}</span>
 </div>
+
+<div class="comment-box">
+  <input class="comment-input" placeholder="Write a comment...">
+  <button class="comment-btn">Post</button>
+</div>
 `;
 
     feed.appendChild(div);
+    
+    const comments = await getComments(post.id);
+
+comments.forEach(comment => {
+
+  const c = document.createElement("div");
+  c.style.fontSize = "14px";
+  c.style.marginTop = "5px";
+
+  c.innerText = comment.text;
+
+  div.appendChild(c);
+
+});
+
     const likeBtn = div.querySelector(".like-btn");
 const likesText = div.querySelector(".likes");
+const usernameEl = div.querySelector(".username");
+
+usernameEl.onclick = () => {
+  window.location.href = `profile.html?uid=${post.userId}`;
+};
+
+const commentBtn = div.querySelector(".comment-btn");
+const commentInput = div.querySelector(".comment-input");
+
+commentBtn.onclick = async () => {
+
+  const text = commentInput.value.trim();
+  if (!text) return;
+
+  const user = auth.currentUser;
+  if (!user) {
+  alert("Please login first");
+  return;
+}
+
+  await createComment(post.id, user.uid, text);
+
+  commentInput.value = "";
+};
 
 likeBtn.onclick = async () => {
 
