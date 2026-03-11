@@ -139,6 +139,7 @@ h1{
 import { createPost } from "./createPost.js";
 import { getNearbyPosts } from "./getNearbyPosts.js";
 import { likePost } from "./likePost.js";
+import { getUser } from "./getUser.js";
 // import { loginWithGoogle } from "./login.js";
 
 const createBtn = document.getElementById("createPost");
@@ -266,10 +267,13 @@ async function loadPosts() {
 
   feed.innerHTML = "";
 
-  posts.forEach(post => {
+  posts.forEach(async (post) => {
 
     const div = document.createElement("div");
     const dist = distanceKm(28.61, 77.23, post.latitude, post.longitude);
+
+    const user = await getUser(post.userId);
+    const username = user ? user.username : "Unknown";
 
     div.style.border = "1px solid black";
     div.style.margin = "10px";
@@ -279,7 +283,7 @@ async function loadPosts() {
 
 div.innerHTML = `
 <div class="post-header">
-<span class="username">${post.userId}</span>
+<span class="username">${username}</span>
 • ${timeAgo(post.timestamp)}
 • ${dist.toFixed(2)} km away
 </div>
