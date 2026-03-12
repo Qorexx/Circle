@@ -143,6 +143,7 @@ import { getUser } from "./getUser.js";
 import { createComment } from "./createComment.js";
 import { auth } from "./firebase.js";
 import { getComments } from "./getComments.js";
+import { deletePost } from "./deletePost.js";
 // import { loginWithGoogle } from "./login.js";
 
 const createBtn = document.getElementById("createPost");
@@ -300,6 +301,7 @@ ${post.text}
 <div class="actions">
 <span class="heart like-btn" data-id="${post.id}">❤️</span>
 <span class="likes">${post.likesCount}</span>
+<button class="delete-btn">Delete</button>
 </div>
 
 <div class="comment-box">
@@ -310,21 +312,25 @@ ${post.text}
 
     feed.appendChild(div);
     
-    const comments = await getComments(post.id);
+const comments = await getComments(post.id);
 
-comments.forEach(comment => {
+for (const comment of comments) {
+
+  const commenter = await getUser(comment.userId);
 
   const c = document.createElement("div");
   c.style.fontSize = "14px";
   c.style.marginTop = "5px";
 
-  c.innerText = comment.text;
+  const name = commenter ? commenter.username : "Unknown";
+
+  c.innerHTML = "<b>" + name + "</b>: " + comment.text;
 
   div.appendChild(c);
 
-});
+}
 
-    const likeBtn = div.querySelector(".like-btn");
+const likeBtn = div.querySelector(".like-btn");
 const likesText = div.querySelector(".likes");
 const usernameEl = div.querySelector(".username");
 
@@ -350,6 +356,27 @@ commentBtn.onclick = async () => {
 
   commentInput.value = "";
 };
+
+const deleteBtn = div.querySelector(".delete-btn");
+
+if (auth.currentUser?.uid !== post.userId) {
+  deleteBtn.style.display = "none";
+}
+
+if (deleteBtn) {
+
+  deleteBtn.onclick = async () => {
+
+    const confirmDelete = confirm("Delete this post?");
+    if (!confirmDelete) return;
+
+    await deletePost(post.id);
+
+    div.remove();
+
+  };
+
+}
 
 likeBtn.onclick = async () => {
 
