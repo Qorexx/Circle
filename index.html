@@ -126,6 +126,15 @@ h1{
   font-size:18px;
 }
 
+.profile-pic{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-right:8px;
+  vertical-align:middle;
+}
+
 
 </style>
  <link rel="stylesheet" href="styles.css">
@@ -227,14 +236,21 @@ createBtn.onclick = async () => {
 
     }
 
-    await createPost(
-      caption,
-      imageUrl,
-      mediaType,
-      28.61,
-      77.23,
-      "test_user"
-    );
+    navigator.geolocation.getCurrentPosition(async (position) => {
+
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+
+  await createPost(
+    caption,
+    imageUrl,
+    mediaType,
+    lat,
+    lon,
+    "test_user"
+  );
+
+});
 
     alert("Post created!");
     loadPosts();
@@ -285,16 +301,22 @@ function distanceKm(lat1, lon1, lat2, lon2) {
 }
 
 async function loadPosts() {
-    console.log("Loading posts...");
-    const posts = await getNearbyPosts(28.61, 77.23, 10);
-    console.log("Posts received:", posts);
+    navigator.geolocation.getCurrentPosition(async (position) => {
+
+const userLat = position.coords.latitude;
+const userLon = position.coords.longitude;
+
+console.log("User location:", userLat, userLon);
+
+const posts = await getNearbyPosts(userLat, userLon, 10);
+console.log("Posts received:", posts);
 
   feed.innerHTML = "";
 
   posts.forEach(async (post) => {
 
     const div = document.createElement("div");
-    const dist = distanceKm(28.61, 77.23, post.latitude, post.longitude);
+    const dist = distanceKm(userLat, userLon, post.latitude, post.longitude);
 
     const user = await getUser(post.userId);
     const username = user ? user.username : "Unknown";
@@ -307,6 +329,7 @@ async function loadPosts() {
 
 div.innerHTML = `
 <div class="post-header">
+<img class="profile-pic" src="${user?.profilePictureUrl || 'https://via.placeholder.com/30'}">
 <span class="username" data-uid="${post.userId}">${username}</span>
 • ${timeAgo(post.timestamp)}
 • ${dist.toFixed(2)} km away
@@ -324,12 +347,12 @@ ${post.text}
   <span class="heart like-btn" data-id="${post.id}">❤️</span>
   <span class="likes">${post.likesCount}</span>
 
-  <span style="margin-left:10px">💬</span>
+  <span class="comment-toggle" style="margin-left:10px; cursor:pointer;">💬</span>
   <span class="comment-count">0</span>
 
 </div>
 
-<div class="comment-box">
+<div class="comment-box" style="display:none;">
   <input class="comment-input" placeholder="Write a comment...">
   <button class="comment-btn">Post</button>
 </div>
@@ -368,6 +391,19 @@ usernameEl.onclick = () => {
 
 const commentBtn = div.querySelector(".comment-btn");
 const commentInput = div.querySelector(".comment-input");
+
+const commentBox = div.querySelector(".comment-box");
+const commentToggle = div.querySelector(".comment-toggle");
+
+commentToggle.onclick = () => {
+
+  if (commentBox.style.display === "none") {
+    commentBox.style.display = "block";
+  } else {
+    commentBox.style.display = "none";
+  }
+
+};
 
 commentBtn.onclick = async () => {
 
@@ -417,8 +453,10 @@ likeBtn.onclick = async () => {
 };
 
   });
-
+  });
 }
+
+
 
 loadPosts();
 
