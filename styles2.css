@@ -1,0 +1,203 @@
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* PAGE */
+
+body{
+background:#0f0f0f;
+color:#f5f5f5;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:40px 20px;
+}
+
+
+/* PROFILE PICTURE */
+
+#profilePic{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.6);
+}
+
+
+/* USERNAME */
+
+#username{
+font-size:26px;
+font-weight:600;
+margin-bottom:10px;
+text-align:center;
+}
+
+
+/* BIO */
+
+#bio{
+color:#a3a3a3;
+font-size:14px;
+margin-bottom:35px;
+text-align:center;
+max-width:400px;
+}
+
+
+/* POSTS TITLE */
+
+h2{
+margin-bottom:25px;
+font-size:22px;
+}
+
+
+/* POSTS CONTAINER */
+
+#posts{
+width:100%;
+max-width:560px;
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+
+/* POST CARD */
+
+.post{
+background:#1a1a1a;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 10px 24px rgba(0,0,0,0.5);
+transition:0.2s;
+}
+
+.post:hover{
+transform:translateY(-2px);
+}
+
+
+/* POST HEADER */
+
+.post-header{
+padding:12px 16px;
+font-size:14px;
+color:#a3a3a3;
+}
+
+.username{
+font-weight:600;
+color:#ffffff;
+}
+
+
+/* POST IMAGE */
+
+.post-image{
+width:100%;
+display:block;
+}
+
+
+/* CAPTION */
+
+.caption{
+padding:14px 16px;
+font-size:15px;
+color:#e5e5e5;
+line-height:1.5;
+background:#1a1a1a;
+}
+
+
+/* ACTIONS (likes/comments) */
+
+.actions{
+padding:8px 16px;
+font-size:14px;
+color:#ff4d6d;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+
+/* COMMENT SECTION */
+
+.comment-box{
+display:flex;
+gap:10px;
+padding:12px 16px 16px 16px;
+border-top:1px solid #2a2a2a;
+}
+
+
+/* COMMENT INPUT */
+
+.comment-box input{
+flex:1;
+background:#2a2a2a;
+border:none;
+outline:none;
+color:#f5f5f5;
+padding:10px 12px;
+border-radius:8px;
+font-size:14px;
+transition:0.2s;
+}
+
+.comment-box input::placeholder{
+color:#888;
+}
+
+.comment-box input:focus{
+background:#333;
+}
+
+
+/* POST BUTTON */
+
+.comment-box button{
+background:#2563eb;
+border:none;
+color:white;
+padding:8px 14px;
+border-radius:8px;
+font-size:14px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.comment-box button:hover{
+background:#1d4ed8;
+transform:translateY(-1px);
+}
+
+.comment-box button:active{
+transform:scale(0.96);
+}
+
+
+/* COMMENT LIST */
+
+.comment-list{
+padding:0 16px 16px 16px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.comment{
+font-size:14px;
+color:#e5e5e5;
+}

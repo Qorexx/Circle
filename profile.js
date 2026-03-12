@@ -25,17 +25,18 @@ snapshot.forEach(doc => {
 
   const post = doc.data();
 
-  if (post.userId === userId) {
+  if (post.userId === userId && (post.text || post.mediaUrl)) {
 
-    const div = document.createElement("div");
+  const div = document.createElement("div");
+  div.className = "post";
 
-    div.innerHTML = `
-      <p>${post.text}</p>
-      ${post.mediaType === "image" ? `<img src="${post.mediaUrl}" width="300">` : ""}
-    `;
+  div.innerHTML = `
+    ${post.mediaType === "image" ? `<img class="post-image" src="${post.mediaUrl}">` : ""}
+    ${post.text ? `<div class="caption">${post.text}</div>` : ""}
+  `;
 
-    postsEl.appendChild(div);
-  }
+  postsEl.appendChild(div);
+}
 
 });
 
