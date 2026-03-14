@@ -258,27 +258,7 @@ step="1"
 >
 
 <span id="radiusValue" style="color:white;">10</span> km
-<div style="
-background:#1a1a1a;
-padding:16px 18px;
-border-radius:14px;
-box-shadow:0 8px 20px rgba(0,0,0,0.5);
-margin-bottom:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
 
-<div style="font-weight:600;color:#e5e5e5;">
-What's happening near you
-</div>
-
-<div style="display:flex;align-items:center;gap:10px;color:#a3a3a3;font-size:14px;">
-<span>Radius</span>
-<span id="radiusValueDisplay">10 km</span>
-</div>
-
-</div>
 
 <div id="feed"></div>
 
@@ -294,6 +274,17 @@ import { auth, db } from "./firebase.js";
 import { getComments } from "./getComments.js";
 import { deletePost } from "./deletePost.js";
 import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+
+  if (!user) {
+    window.location.href = "login.html";
+  }
+
+});
+
+
 
 const createBtn = document.getElementById("createPost");
 const feed = document.getElementById("feed");
@@ -313,6 +304,7 @@ if (photoInput.files.length > 0) {
 fileName.innerText = photoInput.files[0].name;
 }
 };
+
 
 createBtn.onclick = async () => {
 
@@ -422,7 +414,7 @@ const userLon = position.coords.longitude;
 
 const radius = parseFloat(radiusInput.value)||10;
 
-const posts = await getNearbyPosts(userLat,userLon,50);
+const posts = await getNearbyPosts(userLat,userLon,radius);
 
 feed.innerHTML="";
 

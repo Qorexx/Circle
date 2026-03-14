@@ -1,15 +1,23 @@
-import { signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { auth } from "./firebase.js";
-import { createUser } from "./createUser.js";
+import { GoogleAuthProvider, signInWithPopup } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const loginBtn = document.getElementById("googleLogin");
 
 const provider = new GoogleAuthProvider();
 
-export async function loginWithGoogle() {
+loginBtn.onclick = async () => {
 
-  const result = await signInWithPopup(auth, provider);
-  const user = result.user;
+  try {
 
-  await createUser(user);
+    await signInWithPopup(auth, provider);
 
-  return user;
-}
+    window.location.href = "index.html";
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
