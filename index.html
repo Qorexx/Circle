@@ -470,6 +470,84 @@ ${post.mediaType==="image"?`<img class="post-image" src="${post.mediaUrl}">`:""}
 
 feed.appendChild(div);
 
+// USERNAME CLICK → PROFILE
+const usernameEl = div.querySelector(".username");
+usernameEl.onclick = () => {
+  window.location.href = `profile.html?uid=${post.userId}`;
+};
+
+
+// LIKE BUTTON
+const likeBtn = div.querySelector(".like-btn");
+const likesText = div.querySelector(".likes");
+
+likeBtn.onclick = async () => {
+
+  post.likesCount++;
+
+  likesText.innerText = post.likesCount;
+
+  await likePost(post.id);
+
+};
+
+
+// COMMENT TOGGLE
+const commentToggle = div.querySelector(".comment-toggle");
+const commentBox = div.querySelector(".comment-box");
+
+commentToggle.onclick = () => {
+
+  if (commentBox.style.display === "none") {
+    commentBox.style.display = "block";
+  } else {
+    commentBox.style.display = "none";
+  }
+
+};
+
+
+// POST COMMENT
+const commentBtn = div.querySelector(".comment-btn");
+const commentInput = div.querySelector(".comment-input");
+
+commentBtn.onclick = async () => {
+
+  const text = commentInput.value.trim();
+  if (!text) return;
+
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
+
+  await createComment(post.id, user.uid, text);
+
+  commentInput.value = "";
+
+};
+
+
+// DELETE POST
+const deleteBtn = div.querySelector(".delete-btn");
+
+if (auth.currentUser?.uid !== post.userId) {
+  deleteBtn.style.display = "none";
+}
+
+deleteBtn.onclick = async () => {
+
+  const confirmDelete = confirm("Delete this post?");
+  if (!confirmDelete) return;
+
+  await deletePost(post.id);
+
+  div.remove();
+
+};
+
 });
 
 });
