@@ -6,21 +6,361 @@
 
 <style>
 
+  /* FEED HEADER */
+
+.feed-header{
+display:flex;
+align-items:center;
+gap:8px;
+color:#8090b0;
+font-size:14px;
+margin:10px 0 20px 0;
+}
+
+.active-indicator{
+color:#00e5ff;
+}
+
+/* POST CARD */
+
+.post-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.07);
+border-radius:22px;
+padding:18px;
+margin-bottom:18px;
+}
+
+/* TOP SECTION */
+
+.post-top{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:10px;
+}
+
+/* AVATAR */
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+overflow:hidden;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* USER INFO */
+
+.post-info{
+flex:1;
+}
+
+.username{
+font-weight:600;
+color:#e8f0ff;
+}
+
+.post-time{
+font-size:12px;
+color:#8090b0;
+}
+
+/* DISTANCE BADGE */
+
+.distance-badge{
+background:rgba(0,229,255,0.1);
+color:#00e5ff;
+padding:4px 12px;
+border-radius:999px;
+font-size:12px;
+}
+
+/* POST TEXT */
+
+.post-text{
+font-size:16px;
+color:#e8f0ff;
+line-height:1.5;
+margin-top:6px;
+}
+
+/* POST CARD */
+
+.post-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:28px;
+padding:20px;
+margin-bottom:18px;
+}
+
+/* TOP ROW */
+
+.post-top{
+display:flex;
+align-items:center;
+gap:14px;
+margin-bottom:10px;
+}
+
+/* AVATAR */
+
+.avatar{
+width:44px;
+height:44px;
+border-radius:50%;
+overflow:hidden;
+background:#111;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* USER INFO */
+
+.post-info{
+flex:1;
+}
+
+.username{
+font-weight:600;
+font-size:17px;
+color:#e8f0ff;
+}
+
+.post-time{
+font-size:13px;
+color:#8090b0;
+margin-top:2px;
+}
+
+/* DISTANCE BADGE */
+
+.distance-badge{
+display:flex;
+align-items:center;
+gap:6px;
+background:rgba(0,229,255,0.12);
+color:#00e5ff;
+padding:6px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:500;
+}
+
+/* PULSING DOT */
+
+.distance-badge::before{
+content:"";
+width:8px;
+height:8px;
+border-radius:50%;
+background:#00e5ff;
+animation:pulseDot 1.6s infinite;
+}
+
+/* POST TEXT */
+
+.post-text{
+font-size:17px;
+color:#e8f0ff;
+margin-top:8px;
+}
+
+/* DOT PULSE */
+
+@keyframes pulseDot{
+
+0%{
+box-shadow:0 0 0 0 rgba(0,229,255,0.7);
+}
+
+70%{
+box-shadow:0 0 0 10px rgba(0,229,255,0);
+}
+
+100%{
+box-shadow:0 0 0 0 rgba(0,229,255,0);
+}
+
+}
+
+  /* PROFILE SETUP OVERLAY */
+
+.setup-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(3,6,12,0.92);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+/* CARD */
+
+.setup-card{
+width:380px;
+background:rgba(8,13,24,0.9);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:24px;
+padding:32px;
+text-align:center;
+backdrop-filter:blur(20px);
+}
+
+/* TITLE */
+
+.setup-title{
+font-family:'Syne',sans-serif;
+font-size:24px;
+margin-bottom:6px;
+}
+
+/* SUBTITLE */
+
+.setup-subtitle{
+color:#8090b0;
+margin-bottom:22px;
+}
+
+/* AVATAR PREVIEW */
+
+.avatar-preview{
+font-size:40px;
+margin-bottom:18px;
+}
+
+/* AVATAR ROW */
+
+.avatar-row{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+.avatar-option{
+font-size:20px;
+padding:10px;
+border-radius:50%;
+background:rgba(255,255,255,0.05);
+cursor:pointer;
+border:2px solid transparent;
+transition:0.2s;
+}
+
+.avatar-option.selected{
+border-color:#00e5ff;
+box-shadow:0 0 12px rgba(0,229,255,0.7);
+}
+
+/* INPUT */
+
+.setup-input{
+width:100%;
+padding:12px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.05);
+color:white;
+margin-bottom:14px;
+}
+
+/* BIO */
+
+.setup-bio{
+width:100%;
+padding:12px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.05);
+color:white;
+height:90px;
+resize:none;
+}
+
+/* BIO COUNT */
+
+.bio-count{
+font-size:12px;
+color:#8090b0;
+text-align:right;
+margin-top:4px;
+margin-bottom:18px;
+}
+
+/* BUTTON */
+
+.setup-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:18px;
+background:#00e5ff;
+color:#020a12;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+}
+
+.setup-btn:hover{
+background:#1aecff;
+}
+
 /* NAVBAR */
 
 .navbar{
 position:sticky;
 top:0;
 width:100%;
-max-width:600px;
+max-width:420px;
 margin:auto;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:14px 10px;
-background:#0f0f0f;
-border-bottom:1px solid #2a2a2a;
+padding:16px 12px;
+background:rgba(8,13,24,0.85);
+border-bottom:1px solid rgba(255,255,255,0.07);
+backdrop-filter:blur(20px);
 z-index:100;
+}
+
+.logo{
+font-family:'Syne',sans-serif;
+font-size:22px;
+font-weight:800;
+letter-spacing:-0.02em;
+}
+
+.nav-icons{
+display:flex;
+gap:18px;
+}
+
+.nav-icon{
+font-size:20px;
+cursor:pointer;
+color:#8090b0;
+transition:0.2s;
+}
+
+.nav-icon:hover{
+color:#00e5ff;
+transform:scale(1.15);
 }
 
 .logo{
@@ -49,41 +389,57 @@ transform:scale(1.15);
 /* BODY */
 
 body{
-font-family: Arial, Helvetica, sans-serif;
-background:#0f0f0f;
+font-family: 'IBM Plex Sans', sans-serif;
+background:#04060d;
 margin:0;
 display:flex;
 flex-direction:column;
 align-items:center;
+color:#e8f0ff;
 }
-
 
 /* CREATE POST */
 
 .creator{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-margin-bottom:20px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(0,230,255,0.2);
+backdrop-filter:blur(20px);
+padding:22px;
+border-radius:20px;
+margin-bottom:24px;
+width:100%;
 }
 
 .creator input{
 width:100%;
 margin-top:10px;
-padding:10px;
-border-radius:8px;
-border:1px solid #ddd;
+padding:12px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.05);
+color:white;
 }
 
 .creator button{
-margin-top:10px;
-padding:10px;
+margin-top:12px;
+padding:12px;
 border:none;
-background:#2563eb;
-color:white;
-border-radius:8px;
+background:#00e5ff;
+color:#020a12;
+border-radius:999px;
 cursor:pointer;
+font-weight:500;
+transition:0.2s;
+}
+
+.creator button:hover{
+background:#1aecff;
+transform:translateY(-1px);
+}
+
+.creator button:hover{
+background:#1aecff;
+transform:translateY(-1px);
 }
 
 .creator button:hover{
@@ -99,17 +455,17 @@ max-width:600px;
 }
 
 .post{
-background:white;
-border-radius:12px;
-padding:12px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.07);
+border-radius:20px;
+padding:16px;
 margin:16px 0;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .post-header{
 font-size:14px;
-color:#555;
-margin-bottom:8px;
+color:#8090b0;
+margin-bottom:10px;
 position:relative;
 padding-right:30px;
 }
@@ -128,18 +484,19 @@ margin-top:5px;
 .caption{
 margin-top:8px;
 font-size:15px;
+color:#e8f0ff;
 }
 
 .actions{
-margin-top:8px;
+margin-top:10px;
 font-size:14px;
-color:#e63946;
+color:#8090b0;
 }
 
 #app{
 width:100%;
-max-width:600px;
-padding:20px;
+max-width:420px;
+padding:16px;
 }
 
 .like-btn{
@@ -164,7 +521,7 @@ color:#ff3040;
 #radiusInput{
 width:200px;
 margin:0 10px;
-accent-color:#2563eb;
+accent-color:#00e5ff;
 cursor:pointer;
 }
 
@@ -197,14 +554,67 @@ object-fit:cover;
 margin-right:8px;
 vertical-align:middle;
 }
+if (!user) {
+    window.location.href = "login.html";
+  };
 
+
+
+const createBtn = document.getElementById("createPost");
+const feed = docum
 </style>
-
-<link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
+
+  <!-- PROFILE SETUP MODAL -->
+
+<div id="setupOverlay" class="setup-overlay">
+
+<div class="setup-card">
+
+<h2 class="setup-title">Set up your profile</h2>
+
+<p class="setup-subtitle">
+Let people in your circle know who you are
+</p>
+
+<div class="avatar-preview">🧑‍💻</div>
+
+<div class="avatar-row">
+
+<span class="avatar-option selected">🧑‍💻</span>
+<span class="avatar-option">👩‍💻</span>
+<span class="avatar-option">🧑‍🎓</span>
+<span class="avatar-option">👨‍🔬</span>
+<span class="avatar-option">👨‍⚕️</span>
+<span class="avatar-option">👩‍🎨</span>
+<span class="avatar-option">🧑‍🍳</span>
+<span class="avatar-option">👨‍🏫</span>
+
+</div>
+
+<input
+class="setup-input"
+placeholder="Your name"
+>
+
+<textarea
+class="setup-bio"
+placeholder="Short bio (optional)"
+maxlength="160"
+></textarea>
+
+<div class="bio-count">0/160</div>
+
+<button id="setupContinue" class="setup-btn">
+Continue
+</button>
+
+</div>
+
+</div>
 
 
 <!-- NAVBAR -->
@@ -229,9 +639,6 @@ vertical-align:middle;
 <div class="creator">
 
 <h1>Create Post</h1>
-
-<button id="loginBtn">Login with Google</button>
-
 <input id="caption" placeholder="Write a caption">
 
 <input type="file" id="photo" hidden>
@@ -244,7 +651,10 @@ vertical-align:middle;
 </div>
 
 
-<h2 style="color:white;">What's Happening!</h2>
+<div class="feed-header">
+  <div class="active-indicator">👥</div>
+  <span id="activeCount">9 people active in your circle</span>
+</div>
 
 <label style="color:white;">Radius:</label>
 
@@ -433,15 +843,22 @@ div.className="post";
 
 div.innerHTML=`
 
-<div class="post-header">
+<div class="post-card">
 
-<img class="profile-pic" src="${user?.profilePictureUrl || 'https://via.placeholder.com/30'}">
+<div class="post-top">
 
-<span class="username" data-uid="${post.userId}">${username}</span>
+<div class="avatar">
+<img class="profile-pic" src="${user?.profilePictureUrl || 'https://via.placeholder.com/40'}">
+</div>
 
-• ${timeAgo(post.timestamp)}
+<div class="post-info">
+<div class="username" data-uid="${post.userId}">${username}</div>
+<div class="post-time">${timeAgo(post.timestamp)}</div>
+</div>
 
-• ${dist.toFixed(2)} km away
+<div class="distance-badge">
+${dist < 1 ? dist.toFixed(1) + " km" : "nearby"}
+</div>
 
 <button class="delete-btn">🗑</button>
 
@@ -449,21 +866,18 @@ div.innerHTML=`
 
 ${post.mediaType==="image"?`<img class="post-image" src="${post.mediaUrl}">`:""}
 
-<div class="caption">${post.text}</div>
+<div class="post-text">${post.text}</div>
 
 <div class="actions">
 
 <span class="heart like-btn" data-id="${post.id}">❤️</span>
 <span class="likes">${post.likesCount}</span>
 
-<span class="comment-toggle" style="margin-left:10px;cursor:pointer;">💬</span>
+<span class="comment-toggle" style="margin-left:12px;cursor:pointer;">💬</span>
 <span class="comment-count">0</span>
 
 </div>
 
-<div class="comment-box" style="display:none;">
-<input class="comment-input" placeholder="Write a comment...">
-<button class="comment-btn">Post</button>
 </div>
 
 `;
@@ -567,6 +981,6 @@ loadPosts();
 </div>
 
 <script type="module" src="./authController.js"></script>
-
+<script type="module" src="./setup.js"></script>>
 </body>
 </html>
