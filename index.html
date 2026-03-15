@@ -25,10 +25,11 @@ color:#00e5ff;
 
 .post-card{
 background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.07);
-border-radius:22px;
-padding:18px;
+border:1px solid rgba(255,255,255,0.08);
+border-radius:28px;
+padding:20px;
 margin-bottom:18px;
+position:relative;
 }
 
 /* TOP SECTION */
@@ -554,14 +555,43 @@ object-fit:cover;
 margin-right:8px;
 vertical-align:middle;
 }
-if (!user) {
-    window.location.href = "login.html";
-  };
 
+.post-menu{
+position:absolute;
+right:12px;
+top:12px;
+}
 
+.menu-btn{
+font-size:22px;
+cursor:pointer;
+color:#8090b0;
+}
 
-const createBtn = document.getElementById("createPost");
-const feed = docum
+.menu-dropdown{
+display:none;
+position:absolute;
+right:0;
+top:26px;
+background:#111;
+border:1px solid rgba(255,255,255,0.1);
+border-radius:10px;
+padding:6px 0;
+min-width:90px;
+z-index:10;
+}
+
+.delete-option{
+padding:8px 14px;
+cursor:pointer;
+font-size:14px;
+color:#ff5c5c;
+}
+
+.delete-option:hover{
+background:rgba(255,255,255,0.05);
+}
+
 </style>
 
 </head>
@@ -860,7 +890,13 @@ div.innerHTML=`
 ${dist < 1 ? dist.toFixed(1) + " km" : "nearby"}
 </div>
 
-<button class="delete-btn">🗑</button>
+<div class="post-menu">
+  <span class="menu-btn">⋯</span>
+
+  <div class="menu-dropdown">
+    <div class="delete-option">Delete</div>
+  </div>
+</div>
 
 </div>
 
@@ -878,11 +914,73 @@ ${post.mediaType==="image"?`<img class="post-image" src="${post.mediaUrl}">`:""}
 
 </div>
 
+<div class="comment-box" style="display:none;margin-top:10px;">
+<input class="comment-input" placeholder="Write a comment..." style="width:70%;">
+<button class="comment-btn">Post</button>
+</div>
+
 </div>
 
 `;
 
 feed.appendChild(div);
+
+
+const menuBtn = div.querySelector(".menu-btn");
+const menuDropdown = div.querySelector(".menu-dropdown");
+
+menuBtn.onclick = () => {
+
+  if (menuDropdown.style.display === "block") {
+    menuDropdown.style.display = "none";
+  } else {
+    menuDropdown.style.display = "block";
+  }
+
+};
+
+const postMenu = div.querySelector(".post-menu");
+
+if (auth.currentUser?.uid !== post.userId) {
+  postMenu.style.display = "none";
+}
+
+const deleteOption = div.querySelector(".delete-option");
+
+deleteOption.onclick = async () => {
+
+  const confirmDelete = confirm("Delete this post?");
+  if (!confirmDelete) return;
+
+  await deletePost(post.id);
+
+  div.remove();
+
+};
+
+
+// LOAD COMMENTS
+const comments = await getComments(post.id);
+
+const commentCount = div.querySelector(".comment-count");
+
+commentCount.innerText = comments.length;
+
+for (const comment of comments) {
+
+  const commenter = await getUser(comment.userId);
+
+  const c = document.createElement("div");
+  c.style.fontSize = "14px";
+  c.style.marginTop = "6px";
+
+  const name = commenter ? commenter.username : "Unknown";
+
+  c.innerHTML = "<b>" + name + "</b>: " + comment.text;
+
+  div.appendChild(c);
+
+}
 
 // USERNAME CLICK → PROFILE
 const usernameEl = div.querySelector(".username");
@@ -981,6 +1079,6 @@ loadPosts();
 </div>
 
 <script type="module" src="./authController.js"></script>
-<script type="module" src="./setup.js"></script>>
+<script type="module" src="./setup.js"></script>
 </body>
 </html>
