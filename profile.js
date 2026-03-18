@@ -1,7 +1,7 @@
 import { getUser } from "./getUser.js";
 import { getNearbyPosts } from "./getNearbyPosts.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("uid");
@@ -10,10 +10,18 @@ const usernameEl = document.getElementById("username");
 const bioEl = document.getElementById("bio");
 const profilePicEl = document.getElementById("profilePic");
 const postsEl = document.getElementById("posts");
+const editBtn = document.getElementById("editProfileBtn");
 
 async function loadProfile() {
 
   const user = await getUser(userId);
+  const currentUser = auth.currentUser;
+
+if (currentUser && currentUser.uid === userId) {
+  editBtn.style.display = "block";
+} else {
+  editBtn.style.display = "none";
+}
 
   usernameEl.innerText = user.username;
   bioEl.innerText = user.bio || "";
@@ -41,5 +49,21 @@ snapshot.forEach(doc => {
 });
 
 }
+
+editBtn.onclick = () => {
+
+  const newUsername = prompt("Enter new username:");
+  if (!newUsername) return;
+
+  const newBio = prompt("Enter new bio:");
+
+  updateDoc(doc(db,"Users",userId),{
+    username:newUsername,
+    bio:newBio
+  }).then(()=>{
+    location.reload();
+  });
+
+};
 
 loadProfile();

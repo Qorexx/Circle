@@ -328,12 +328,10 @@ background:#1aecff;
 position:sticky;
 top:0;
 width:100%;
-max-width:420px;
-margin:auto;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:16px 12px;
+padding:16px 40px;
 background:rgba(8,13,24,0.85);
 border-bottom:1px solid rgba(255,255,255,0.07);
 backdrop-filter:blur(20px);
@@ -419,6 +417,7 @@ border-radius:14px;
 border:1px solid rgba(255,255,255,0.15);
 background:rgba(255,255,255,0.05);
 color:white;
+box-sizing:border-box;
 }
 
 .creator button{
@@ -559,7 +558,7 @@ vertical-align:middle;
 .post-menu{
 position:absolute;
 right:12px;
-top:12px;
+top:1px;
 }
 
 .menu-btn{
@@ -590,6 +589,13 @@ color:#ff5c5c;
 
 .delete-option:hover{
 background:rgba(255,255,255,0.05);
+}
+
+.menu-btn{
+font-size:20px;
+color:#8090b0;
+cursor:pointer;
+padding:4px 6px;
 }
 
 </style>
@@ -887,7 +893,7 @@ div.innerHTML=`
 </div>
 
 <div class="distance-badge">
-${dist < 1 ? dist.toFixed(1) + " km" : "nearby"}
+${dist.toFixed(1)} km
 </div>
 
 <div class="post-menu">
